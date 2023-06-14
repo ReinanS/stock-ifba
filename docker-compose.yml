@@ -18,7 +18,7 @@ services:
       - 15672:15672
 
   producer:
-    build: /home/reinan/Documents/Git/stock-ifba/stock-producer-api/stock-ifba-api/stock-ifba-api
+    build: stock-producer-api/stock-ifba-api/stock-ifba-api
     environment:
       DbServer: sqlserver
       DbPort: 1433
