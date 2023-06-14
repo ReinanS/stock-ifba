@@ -1,0 +1,32 @@
+version: '3'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: numsey#2021
+      MSSQL_PID: Express
+    ports:
+      - 1433:1433
+    volumes:
+      - sqldata:/var/opt/mssql
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  producer:
+    build: /home/reinan/Documents/Git/stock-ifba/stock-producer-api/stock-ifba-api/stock-ifba-api
+    environment:
+      DbServer: sqlserver
+      DbPort: 1433
+      DbUser: SA
+      Password: numsey#2021
+      Database: StockDb
+    ports: 
+      - 8090:80
+
+volumes:
+  sqldata:
